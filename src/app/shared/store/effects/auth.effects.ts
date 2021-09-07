@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { dispatch } from 'rxjs/internal/observable/pairs';
 import { catchError, concatMap, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AuthenticationService, UsersCRUDService } from '../../sdk';
 import { login, loginSuccess, logout, saveToLocalStorage, whoAmI, whoAmIFailure, whoAmISuccess } from '../actions/auth.actions';
