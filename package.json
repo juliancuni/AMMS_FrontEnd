@@ -27,6 +27,7 @@
     "@ngrx/store": "^12.4.0",
     "@ngrx/store-devtools": "^12.4.0",
     "@openapitools/openapi-generator-cli": "^2.4.1",
+    "appwrite": "^4.0.3",
     "bootstrap": "^5.1.0",
     "jquery": "^3.6.0",
     "ngx-bootstrap": "^7.0.0",

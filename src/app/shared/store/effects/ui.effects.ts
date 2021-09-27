@@ -9,7 +9,7 @@ export class UiEffects {
 
     toastrError$ = createEffect(() => this.actions$.pipe(
         ofType(toastrError),
-        tap(({ error }) => this._toastService.error(error.message, error.statusCode))
+        tap(({ error }) => this._toastService.error(error, 'Error!'))
     ), { dispatch: false });
 
     toastrWarning$ = createEffect(() => this.actions$.pipe(

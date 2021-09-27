@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { UserDto } from 'src/app/shared/sdk';
+import { Account } from 'src/app/shared/appwritesdk/models/account.type';
 import { AppState } from 'src/app/shared/store';
 import { whoAmI } from 'src/app/shared/store/actions/auth.actions';
-import { myUser } from 'src/app/shared/store/selectors/auth.selectors';
-
+import { thisUser } from 'src/app/shared/store/selectors/auth.selectors'
 @Component({
   selector: 'app-userblock',
   templateUrl: './userblock.component.html',
@@ -13,12 +12,12 @@ import { myUser } from 'src/app/shared/store/selectors/auth.selectors';
 })
 export class UserblockComponent implements OnInit {
 
-  myUser$: Observable<UserDto>;
+  thisUser$: Observable<Account>;
   constructor(
     private readonly _store: Store<AppState>,
   ) {
-    this._store.dispatch(whoAmI());
-    this.myUser$ = this._store.pipe(select(myUser)) as Observable<UserDto>;
+    this._store.dispatch(whoAmI()); 
+    this.thisUser$ = this._store.pipe(select(thisUser)) as Observable<Account>;
   }
 
   ngOnInit(): void {

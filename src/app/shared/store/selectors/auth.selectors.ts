@@ -8,7 +8,7 @@ export const isAuthenticated = createSelector(
     auth => !!auth.authenticated
 )
 
-export const myUser = createSelector(
+export const thisUser = createSelector(
     selectAuthState,
-    (state) => state.myUser
+    (state) => state.loggedInAccount
 )

@@ -12,7 +12,7 @@ export const loading = createAction(
 /** Toastr notifications */
 export const toastrError = createAction(
     '[Toastr Error] show error',
-    props<{ error: any }>()
+    props<{ error: string }>()
 )
 
 export  const toastrWarning = createAction(

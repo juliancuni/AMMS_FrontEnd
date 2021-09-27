@@ -8,7 +8,7 @@ import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ApiModule } from './shared/sdk/api.module';
+// import { ApiModule } from './shared/sdk/api.module';
 import { Configuration } from './shared/sdk';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './shared/store';
@@ -17,7 +17,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { AuthEffects } from './shared/store/effects/auth.effects';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+// import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { UiEffects } from './shared/store/effects/ui.effects';
 
 const apiConf = () => {
@@ -35,7 +35,7 @@ const apiConf = () => {
     RoutesModule,
     SharedModule.forRoot(),
     LayoutModule,
-    ApiModule.forRoot(apiConf),
+    // ApiModule.forRoot(apiConf),
     StoreModule.forRoot(reducers,
       {
         metaReducers,
@@ -64,7 +64,7 @@ const apiConf = () => {
       }
     ),
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store';
-import { login } from 'src/app/shared/store/actions/auth.actions';
-// import { CustomValidators } from 'ngx-custom-validators';
+import { login, logout } from 'src/app/shared/store/actions/auth.actions';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +18,10 @@ export class LoginComponent implements OnInit {
     public readonly fb: FormBuilder,
     private readonly _store: Store<AppState>,
   ) {
-
-    this.valForm = this.fb.group({
-      'identity': ["root", Validators.required],
-      'password': ["36638833", Validators.required]
+    this.valForm = fb.group({
+      'email': [environment.production ? null : 'julian.cuni@microservices.al', Validators.compose([Validators.required])],
+      'password': [environment.production ? null : '36638833', Validators.required]
     });
-
   }
 
   submitLogin($ev: any, value: any) {
@@ -32,12 +30,15 @@ export class LoginComponent implements OnInit {
       this.valForm.controls[c].markAsTouched();
     }
     if (this.valForm.valid) {
-      this._store.dispatch(login({ loginDto: this.valForm.value }))
+      const { email, password } = this.valForm.value;
+      this._store.dispatch(login({ email, password }))
     }
   }
 
-  ngOnInit() {
-
+  logout() {
+    this._store.dispatch(logout());
   }
+
+  ngOnInit() { }
 
 }

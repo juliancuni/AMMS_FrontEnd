@@ -1,30 +1,28 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { TokenDto, UserDto } from '../../sdk';
-import { loginSuccess, logout, whoAmISuccess } from '../actions/auth.actions';
+import { createReducer, on } from '@ngrx/store';
+import { Account } from '../../appwritesdk/models/account.type';
+// import { AppSession } from '../../appwritesdk/models/session.type';
+import { loginSuccess, logoutSuccess, whoAmISuccess } from '../actions/auth.actions';
 
 
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
   authenticated: boolean;
-  token: TokenDto | undefined;
-  loggedUser: UserDto | undefined;
-  myUser?: UserDto;
+  // session?: AppSession | null;
+  loggedInAccount?: Account | null;
 }
 
 export const initialState: AuthState = {
   authenticated: false,
-  token: undefined,
-  loggedUser: undefined,
-  myUser: undefined,
-
+  // session: null,
+  loggedInAccount: null,
 };
 
 
 export const authReducer = createReducer(
   initialState,
-  on(loginSuccess, (state, { token }) => ({ ...state, token, authenticated: true })),
-  on(logout, (state) => ({ ...state, authenticated: false })),
-  on(whoAmISuccess, (state, { myUser }) => ({ ...state, myUser })),
+  on(loginSuccess, (state) => ({ ...state, authenticated: true })),
+  on(logoutSuccess, (state) => ({ ...state, authenticated: false, loggedInAccount: null })),
+  on(whoAmISuccess, (state, { loggedInAccount }) => ({ ...state, loggedInAccount, authenticated: true })),
 );
 

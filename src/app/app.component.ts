@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './shared/store';
 import { loginSuccess } from './shared/store/actions/auth.actions';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const access_token: string = localStorage.getItem('access_token')!;
-    if (access_token) this._store.dispatch(loginSuccess({ token: { access_token } }));
+    const account: string = localStorage.getItem('account')!;
+    if (account) this._store.dispatch(loginSuccess()); 
   }
 }
