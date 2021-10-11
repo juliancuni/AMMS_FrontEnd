@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { Account } from '../../appwritesdk/models/account.type';
+import { IAccount } from '../../appwritesdk/models/account.interface';
 // import { AppSession } from '../../appwritesdk/models/session.type';
-import { loginSuccess, logoutSuccess, whoAmISuccess } from '../actions/auth.actions';
+import { loginSuccess, logoutSuccess, whoAmIFailure, whoAmISuccess } from '../actions/auth.actions';
 
 
 export const authFeatureKey = 'auth';
@@ -9,7 +9,7 @@ export const authFeatureKey = 'auth';
 export interface AuthState {
   authenticated: boolean;
   // session?: AppSession | null;
-  loggedInAccount?: Account | null;
+  loggedInAccount?: IAccount | null;
 }
 
 export const initialState: AuthState = {
@@ -24,5 +24,6 @@ export const authReducer = createReducer(
   on(loginSuccess, (state) => ({ ...state, authenticated: true })),
   on(logoutSuccess, (state) => ({ ...state, authenticated: false, loggedInAccount: null })),
   on(whoAmISuccess, (state, { loggedInAccount }) => ({ ...state, loggedInAccount, authenticated: true })),
+  on(whoAmIFailure, (state) => ({ ...state, authenticated: false, loggedInAccount: null }))
 );
 

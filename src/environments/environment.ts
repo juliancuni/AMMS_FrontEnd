@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  APPWRITE_ENDPOINT: "https://appwrite.microservices.al/v1",
-  APPWRITE_PROJECTID: "61514e1993ef0",
+  APPWRITE_ENDPOINT: "http://localhost/v1",
+  APPWRITE_PROJECTID: "616344ff267f5",
 
 };
 

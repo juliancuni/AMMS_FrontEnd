@@ -1,4 +1,4 @@
-export interface AppSession {
+export interface IAppSession {
     $id: string;
     userId: string;
     expire: number;

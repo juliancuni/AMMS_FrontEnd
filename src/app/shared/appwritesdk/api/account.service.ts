@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { ApiHelper } from '../api.helper';
-import { AppSession } from '../models/session.type';
-import { Account } from '../models/account.type';
+import { IAppSession } from '../models/session.interface';
+import { IAccount } from '../models/account.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
 
     constructor() { }
 
-    login(email: string, password: string): Observable<AppSession> {
-        return from(ApiHelper.provider()?.account.createSession(email, password) as Promise<AppSession>);
+    login(email: string, password: string): Observable<IAppSession> {
+        return from(ApiHelper.provider()?.account.createSession(email, password) as Promise<IAppSession>);
     }
 
     logout() {
         return from(ApiHelper.provider().account.deleteSession('current'));
     }
 
-    signUp(account: Account) {
+    signUp(account: IAccount) {
 
     }
 
-    whoAmI(): Observable<Account> {
-        return from(ApiHelper.provider().account.get() as Promise<Account>);
+    whoAmI(): Observable<IAccount> {
+        return from(ApiHelper.provider().account.get() as Promise<IAccount>);
     }
-
 }

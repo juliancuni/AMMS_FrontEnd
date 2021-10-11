@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AppState } from '../store';
+import { AuthState } from '../store/reducers/auth.reducer';
 import { isAuthenticated } from '../store/selectors/auth.selectors';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { isAuthenticated } from '../store/selectors/auth.selectors';
 export class AuthGuard implements CanActivate {
 
   constructor(
-    private readonly _store: Store<AppState>,
+    private readonly _store: Store<AuthState>,
     private readonly _router: Router,
   ) { }
 
@@ -20,10 +20,9 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    return this._store.pipe(
-      select(isAuthenticated),
-      map(isAuthenticated => {
-        if (!isAuthenticated) {
+    return this._store.pipe(select(isAuthenticated),
+      map(authenticated => {
+        if (!authenticated) {
           this._router.navigateByUrl('/login');
           return false;
         }

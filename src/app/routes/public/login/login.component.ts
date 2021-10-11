@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
     private readonly _store: Store<AppState>,
   ) {
     this.valForm = fb.group({
-      'email': [environment.production ? null : 'julian.cuni@microservices.al', Validators.compose([Validators.required])],
-      'password': [environment.production ? null : '36638833', Validators.required]
+      'email': [environment.production ? null : 'juliancuni@gmail.com', Validators.compose([Validators.required])],
+      'password': [environment.production ? null : 'newSnew2013.', Validators.required]
     });
   }
 
@@ -35,9 +35,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  logout() {
-    this._store.dispatch(logout());
-  }
+  // logout() {
+  //   this._store.dispatch(logout());
+  // }
 
   ngOnInit() { }
 

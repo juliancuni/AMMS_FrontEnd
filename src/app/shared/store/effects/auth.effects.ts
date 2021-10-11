@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AuthenticationService, UsersCRUDService } from '../../sdk';
-import { login, loginSuccess, logout, logoutSuccess, saveToLocalStorage, whoAmI, whoAmISuccess } from '../actions/auth.actions';
+import { login, loginSuccess, logout, logoutSuccess, saveToLocalStorage, whoAmI, whoAmIFailure, whoAmISuccess } from '../actions/auth.actions';
 import { toastrError } from '../actions/ui.actions';
 
 import { AccountService } from '../../appwritesdk/api/account.service';
@@ -15,11 +15,14 @@ export class AuthEffects {
 
   login$ = createEffect(() => this.actions$.pipe(
     ofType(login),
-    exhaustMap((action) =>
-      this._accountService.login(action.email, action.password).pipe(
-        map((_) => {
+    exhaustMap(({email, password}) =>
+      this._accountService.login(email, password).pipe(
+        concatMap((_) => {
           this._router.navigateByUrl("/app");
-          return loginSuccess()
+          return [
+            loginSuccess(), 
+            // whoAmI()
+          ]
         }),
         catchError((error) => { return of(toastrError({ error: error.message })) })
       )
@@ -47,14 +50,18 @@ export class AuthEffects {
           saveToLocalStorage({ loggedInAccount: account })
         ]
       }),
-      catchError((error) => { return of(toastrError({ error: error.message })) })
+      catchError((error) => {
+        localStorage.removeItem('account');
+        this._router.navigateByUrl('/login')
+        return of(whoAmIFailure())
+      })
     ))
   ))
 
   saveToLocalStorage$ = createEffect(() => this.actions$.pipe(
     ofType(saveToLocalStorage),
     tap(({ loggedInAccount }) => {
-      localStorage.setItem('account', JSON.stringify(loggedInAccount.$id));
+      localStorage.setItem('account', JSON.stringify(loggedInAccount));
       this._router.navigateByUrl("/app");
     })
   ), { dispatch: false });
