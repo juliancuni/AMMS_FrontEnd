@@ -7,7 +7,7 @@ import { AuthenticationService, UsersCRUDService } from '../../sdk';
 import { login, loginSuccess, logout, logoutSuccess, saveToLocalStorage, whoAmI, whoAmIFailure, whoAmISuccess } from '../actions/auth.actions';
 import { toastrError } from '../actions/ui.actions';
 
-import { AccountService } from '../../appwritesdk/api/account.service';
+import { AccountApi } from '../../appwritesdk/api/account.api';
 
 
 @Injectable()
@@ -114,7 +114,7 @@ export class AuthEffects {
     private readonly _authService: AuthenticationService,
     private readonly _router: Router,
     private readonly _userService: UsersCRUDService,
-    private readonly _accountService: AccountService,
+    private readonly _accountService: AccountApi,
   ) { }
 
 }

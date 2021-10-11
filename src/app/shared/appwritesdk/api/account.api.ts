@@ -5,7 +5,7 @@ import { IAppSession } from '../models/session.interface';
 import { IAccount } from '../models/account.interface';
 
 @Injectable({ providedIn: 'root' })
-export class AccountService {
+export class AccountApi {
 
     constructor() { }
 

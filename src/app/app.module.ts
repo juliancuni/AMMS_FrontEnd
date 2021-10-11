@@ -19,6 +19,7 @@ import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { AuthEffects } from './shared/store/effects/auth.effects';
 // import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { UiEffects } from './shared/store/effects/ui.effects';
+import { MenuEffects } from './shared/store/effects/menu.effects';
 
 const apiConf = () => {
   return new Configuration({ basePath: "http://localhost:3000" })
@@ -56,7 +57,7 @@ const apiConf = () => {
         autoPause: true
       }
     ),
-    EffectsModule.forRoot([AuthEffects, UiEffects]),
+    EffectsModule.forRoot([AuthEffects, UiEffects, MenuEffects]),
     StoreRouterConnectingModule.forRoot(
       {
         stateKey: 'router',

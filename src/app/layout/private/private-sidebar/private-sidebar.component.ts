@@ -1,7 +1,12 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IMenu } from 'src/app/shared/appwritesdk/models/menu.interface';
 import { MenuService } from 'src/app/shared/services/menu.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
+import { getMenus } from 'src/app/shared/store/actions/menu.actions';
+import { MenuState } from 'src/app/shared/store/reducers/menu.reducer';
 
 declare var $: any;
 
@@ -13,6 +18,7 @@ declare var $: any;
 export class PrivateSidebarComponent implements OnInit, OnDestroy {
 
   menuItems: Array<any>;
+  menuItems$: Observable<IMenu[]>;
   router?: Router;
   sbclickEvent = 'click.sidebar-toggle';
   $doc: any = null;
@@ -21,11 +27,14 @@ export class PrivateSidebarComponent implements OnInit, OnDestroy {
     public menu: MenuService,
     public settings: SettingsService, 
     public injector: Injector,
+    private readonly _store: Store<MenuState>
   ) {
     this.menuItems = menu.getMenu();
+    this.menuItems$ = menu.getMenu$();
   }
 
   ngOnInit(): void {
+    this._store.dispatch(getMenus())
     this.router = this.injector.get(Router);
 
     this.router.events.subscribe((val) => {
