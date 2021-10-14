@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <div class="abs-center wd-xl">
+        <div class="card">
+            <div class="card-body">
+                <p class="text-center">Ju lutem hapni adresen tuaj te e-mailit dhe ndiqni aty udhezimet per te
+                    aktivizuar llogarine.</p>
+                <div class="d-flex">
+                    <div class="mt-1">
+                        <span class="text-muted">
+                            <p class="text-sm">Nuk ju ka ardhur asnje e-mail nga info@microservices.al?</p>
+                            <p class="text-sm">Keni kontrolluar ne spam?</p>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="mr-auto">
+                        <button class="btn btn-sm btn-primary" type="button" (click)="resend()">Ridergo</button>
+                    </div>
+                    <div class="ml-auto">
+                        <button class="btn btn-sm btn-secondary" type="button" (click)="login()" *ngIf="isAuthenticated$ | async">Login</button>
+                        <a class="btn btn-sm btn-secondary" [routerLink]="'/login'" *ngIf="!(isAuthenticated$ | async)">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

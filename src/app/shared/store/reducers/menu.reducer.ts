@@ -5,8 +5,7 @@ import { getMenusSuccess } from '../actions/menu.actions';
 
 
 export const menusFeatureKey = 'menus';
-export interface MenuState extends EntityState<IMenu> {
-}
+export interface MenuState extends EntityState<IMenu> { }
 
 export const menuAdapter = createEntityAdapter<IMenu>({
   selectId: menu => menu.$id!,

@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './routes';
-import { MenuService } from '../shared/services/menu.service';
-import { menu } from './menu';
+// import { MenuService } from '../shared/services/menu.service';
+// import { menu } from './menu';
 
 
 

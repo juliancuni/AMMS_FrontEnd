@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { finalize, first, map } from 'rxjs/operators';
 import { AppState } from '..';
-import { loadUsers } from '../actions/user.actions';
+import { getUsers } from '../actions/user.actions';
 
 @Injectable()
 export class UsersResolver implements Resolve<any> {
@@ -19,7 +19,7 @@ export class UsersResolver implements Resolve<any> {
                 if (!this.loading) {
                     if (!store.users || store.users.ids.length === 0) {
                         this.loading = true;
-                        this.store.dispatch(loadUsers());
+                        this.store.dispatch(getUsers());
                     }
                 }
             }),

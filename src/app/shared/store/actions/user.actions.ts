@@ -1,18 +1,19 @@
 import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
+import { IAccount } from '../../appwritesdk/models/account.interface';
 import { UserDto } from '../../sdk';
 
 /** Load Users */
-export const loadUsers = createAction(
+export const getUsers = createAction(
   '[User Resolver] Load Users'
 );
 
-export const loadUsersSuccess = createAction(
+export const getUsersSuccess = createAction(
   '[Effect loadUsers$] Load Users Success',
-  props<{ users: UserDto[] }>()
+  props<{ users: IAccount[] }>()
 );
 
-export const loadUsersFailure = createAction(
+export const getUsersFailure = createAction(
   '[Effect loadUsers$] Load Users Failure',
   props<{ error: any }>()
 );
@@ -20,12 +21,12 @@ export const loadUsersFailure = createAction(
 /** Add User */
 export const addNewUser = createAction(
   '[User Modal] Add New User',
-  props<{ user: UserDto }>()
+  props<{ user: IAccount }>()
 );
 
 export const addNewUserSuccess = createAction(
   '[Effect addNewUser$] Add New User Success',
-  props<{ user: UserDto }>()
+  props<{ user: IAccount }>()
 );
 
 export const addNewUserFailure = createAction(
@@ -36,12 +37,12 @@ export const addNewUserFailure = createAction(
 /** Update User */
 export const updateUser = createAction(
   '[User Modal] Update User',
-  props<{ update: Update<UserDto> }>()
+  props<{ update: Update<IAccount> }>()
 );
 
 export const updateUserSuccess = createAction(
   '[Effect updateUser$] Update User Success',
-  props<{ user: UserDto }>()
+  props<{ user: IAccount }>()
 );
 
 export const updateUserFailure = createAction(
@@ -57,7 +58,7 @@ export const deleteUser = createAction(
 
 export const deleteUserSuccess = createAction(
   '[Effect deleteUser$] delete User Success',
-  props<{ user: UserDto }>()
+  props<{ user: IAccount }>()
 );
 
 export const deleteUserFailure = createAction(

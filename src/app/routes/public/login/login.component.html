@@ -23,8 +23,15 @@
                             *ngIf="valForm.controls['password'].hasError('required') && (valForm.controls['password'].dirty || valForm.controls['password'].touched)">
                             S'mund te lihet bosh</div>
                     </div>
+                    <div class="clearfix">
+                        <div class="float-right">
+                            <a class="text-muted" [routerLink]="'/recover'">Keni harruar te dhenat personale?</a>
+                        </div>
+                    </div>
                     <button class="btn btn-block btn-primary mt-3" type="submit">Login</button>
                 </form>
+                <!-- <p class="pt-3 text-center">Doni te regjistroheni?</p> -->
+                <a class="btn btn-block btn-secondary" [routerLink]="'/signup'">Krijo llogari</a>
                 <!-- <button class="btn btn-block btn-secondary mt-3" type="button" (click)="logout()">Logout</button> -->
             </div>
         </div>

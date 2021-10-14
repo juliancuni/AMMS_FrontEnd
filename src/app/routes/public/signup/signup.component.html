@@ -1,0 +1,84 @@
+<div class="wrapper">
+    <div class="block-center mt-4 wd-xl">
+        <!-- START card-->
+        <div class="card card-flat">
+            <div class="card-body">
+                <p class="text-center py-2">Krijo llogari te re.</p>
+                <form [formGroup]="valForm" class="form-validate mb-3" role="form" name="registerForm" novalidate=""
+                    (submit)="submitForm($event)">
+                    <div class="form-group">
+                        <label class="text-muted mb-1">Emri i plote</label>
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" type="text" name="emri_plote"
+                                placeholder="Emer Mbiemer" autocomplete="off" formControlName="emriIPlote" required="" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-muted bg-transparent border-left-0">
+                                    <em class="fa fa-user"></em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="f.emriIPlote.errors?.required && (f.emriIPlote.dirty || f.emriIPlote.touched)">
+                            S'mund te lihet bosh</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-muted mb-1">Email</label>
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" type="email" name="account_email"
+                                placeholder="email@adresa.al" autocomplete="off" formControlName="email" required="" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-muted bg-transparent border-left-0">
+                                    <em class="fa fa-envelope"></em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="f.email.errors?.required && (f.email.dirty || f.email.touched)">
+                            S'mund te lihet bosh</div>
+                        <div class="text-danger" *ngIf="f.email.errors?.email && (f.email.dirty || f.email.touched)">
+                            Email i pasakte</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-muted mb-1">Password</label>
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" id="id-password" type="password" name="password"
+                                formControlName="password" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-muted bg-transparent border-left-0">
+                                    <em class="fa fa-lock"></em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-danger"
+                            *ngIf="f.password.errors?.required && (f.password.dirty || f.password.touched)">
+                            S'mund te lihet bosh</div>
+                        <div class="text-danger"
+                            *ngIf="f.password.errors?.minlength">
+                            Jo me pak se 6 karaktere</div>
+                            <div class="text-danger"
+                            *ngIf="f.password.errors?.maxLength">
+                            Jo me shume se 32 karaktere</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-muted mb-1">Rishkruaj Password</label>
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" type="password" name="confirmPassword"
+                                formControlName="confirmPassword" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-muted bg-transparent border-left-0">
+                                    <em class="fa fa-lock"></em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="f.confirmPassword.errors?.required && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                            S'mund te lihet bosh</div>
+                        <div class="text-danger" *ngIf="f.confirmPassword.errors?.matching">
+                            Password-et nuk perputhen</div>
+                    </div>
+                    <button class="btn btn-block btn-primary mt-3" type="submit">Krijo llogari</button>
+                </form>
+                <div class="alert alert-danger text-center"></div>
+                <p class="pt-3 text-center">Keni nje llogari?</p>
+                <a class="btn btn-block btn-secondary" [routerLink]="'/login'">Login</a>
+            </div>
+        </div>
+    </div>
+</div>

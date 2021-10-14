@@ -12,10 +12,6 @@ export const getMenusSuccess = createAction(
   props<{ menus: IMenu[] }>()
 );
 
-export const getMenusFailure = createAction(
-  '[getAll menus Err] Error',
-  props<{ error: any }>()
-);
 
 export const updateMenu = createAction(
   '[Menu Component] Update Menu',
@@ -25,9 +21,4 @@ export const updateMenu = createAction(
 export const updateMenuSuccess = createAction(
   '[update menu] Success',
   props<{ menu: IMenu }>()
-);
-
-export const updateMenuFailure = createAction(
-  '[update menu err] Error',
-  props<{ error: any }>()
 );
