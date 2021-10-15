@@ -20,6 +20,9 @@ import { AuthEffects } from './shared/store/effects/auth.effects';
 // import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { UiEffects } from './shared/store/effects/ui.effects';
 import { MenuEffects } from './shared/store/effects/menu.effects';
+import { EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './entity-metadata';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const apiConf = () => {
   return new Configuration({ basePath: "http://localhost:3000" })
@@ -64,6 +67,8 @@ const apiConf = () => {
         routerState: RouterState.Minimal
       }
     ),
+    EntityDataModule.forRoot(entityConfig),
+    ReactiveFormsModule,
   ],
   // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

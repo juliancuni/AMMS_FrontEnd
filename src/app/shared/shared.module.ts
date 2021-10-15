@@ -9,6 +9,8 @@ import { MenuService } from './services/menu.service';
 import { SettingsService } from './services/settings.service';
 import { ToastrModule } from 'ngx-toastr';
 
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 
 @NgModule({
   declarations: [],
@@ -19,6 +21,12 @@ import { ToastrModule } from 'ngx-toastr';
     ModalModule.forRoot(),
     ButtonsModule.forRoot(),
     ToastrModule.forRoot(),
+    FormlyModule.forRoot({
+      extras: { lazyRender: true },
+      validationMessages: [{ name: 'required', message: 'S\'mund te lihet bosh' },],
+    }),
+    FormlyBootstrapModule,
+
   ],
   providers: [
     MenuService,
@@ -30,7 +38,9 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     ModalModule,
     ButtonsModule,
-    ToastrModule
+    ToastrModule,
+    FormlyModule,
+    FormlyBootstrapModule,
   ]
 })
 export class SharedModule {

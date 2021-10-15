@@ -1,3 +1,15 @@
-<p>dashboard works!</p>
+<div *ngFor="let ndermarrja of ndermarrje$ | async">
+    {{ndermarrja}}
+</div>
+
 <pre>
+    {{ndermarrje$ | async |json}}
 </pre>
+
+<div *ngIf="(ndermarrje$ | async)!.length === 0"><button class="btn btn-secondary">Regjistro Ndermarrje</button></div>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

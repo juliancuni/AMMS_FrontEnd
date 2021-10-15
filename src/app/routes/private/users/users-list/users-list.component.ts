@@ -20,7 +20,7 @@ export class UsersListComponent implements OnInit {
   // modalRef?: BsModalRef;
   user?: UserDto;
   constructor(
-    private modalService: BsModalService,
+    private modalService: BsModalService, 
     // private readonly store: Store<UserState>,
 
   ) {

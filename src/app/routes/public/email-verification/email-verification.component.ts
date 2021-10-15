@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { createEmailVerification, logout } from 'src/app/shared/store/actions/auth.actions';
 import { AuthState } from 'src/app/shared/store/reducers/auth.reducer';
 import { isAuthenticated, thisUser } from 'src/app/shared/store/selectors/auth.selectors';
