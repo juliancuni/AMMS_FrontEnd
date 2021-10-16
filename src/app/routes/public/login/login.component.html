@@ -3,7 +3,11 @@
         <div class="card card-flat">
             <div class="card-body">
                 <p class="text-center py-2">LOGIN</p>
-                <form [formGroup]="valForm" class="form-validate mb-3" role="form" name="loginForm" novalidate=""
+                <form [formGroup]="loginForm" (ngSubmit)="submitLogin($event)" class="form-validate mb-3">
+                    <formly-form [model]="loginModel" [fields]="fields" [options]="options" [form]="loginForm"></formly-form>
+                    <button type="submit" class="btn btn-block btn-primary mt-3">Login</button>
+                </form>
+                <!-- <form [formGroup]="valForm" class="form-validate mb-3" role="form" name="loginForm" novalidate=""
                     (submit)="submitLogin($event, valForm.value)">
                     <div class="form-group">
                         <div class="input-group with-focus">
@@ -29,7 +33,7 @@
                         </div>
                     </div>
                     <button class="btn btn-block btn-primary mt-3" type="submit">Login</button>
-                </form>
+                </form> -->
                 <!-- <p class="pt-3 text-center">Doni te regjistroheni?</p> -->
                 <a class="btn btn-block btn-secondary" [routerLink]="'/signup'">Krijo llogari</a>
                 <!-- <button class="btn btn-block btn-secondary mt-3" type="button" (click)="logout()">Logout</button> -->

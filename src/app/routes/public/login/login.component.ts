@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { AppState } from 'src/app/shared/store';
 import { login, logout } from 'src/app/shared/store/actions/auth.actions';
 import { environment } from 'src/environments/environment';
@@ -12,32 +13,56 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
 
-  valForm: FormGroup;
+  loginForm = new FormGroup({});
+  loginModel = { email: environment.production ? '' : 'juliancuni@gmail.com', password: environment.production ? '' : '36638833' };
+  options = {}
+  fields: FormlyFieldConfig[] = [
+    {
+      key: 'email',
+      type: 'input',
+      modelOptions: {
+        updateOn: 'submit',
+      },
+      validators: {
+        validation: ['email'],
+      },
+      templateOptions: {
+        type: 'email',
+        label: 'Email',
+        placeholder: 'email@domain.al',
+        required: true,
+      }
+    },
+    {
+      key: 'password',
+      type: 'input',
+      modelOptions: {
+        updateOn: 'submit',
+      },
+      templateOptions: {
+        type: 'password',
+        label: 'Password',
+        placeholder: 'Password',
+        minLength: 6,
+        maxLength: 32,
+        required: true,
+      }
+    }]
 
   constructor(
-    public readonly fb: FormBuilder,
     private readonly _store: Store<AppState>,
   ) {
-    this.valForm = fb.group({
-      'email': [environment.production ? null : 'juliancuni@gmail.com', Validators.compose([Validators.required])],
-      'password': [environment.production ? null : 'newSnew2013.', Validators.required]
-    });
   }
 
-  submitLogin($ev: any, value: any) {
+  submitLogin($ev: any) {
     $ev.preventDefault();
-    for (let c in this.valForm.controls) {
-      this.valForm.controls[c].markAsTouched();
+    for (let c in this.loginForm.controls) {
+      this.loginForm.controls[c].markAsTouched();
     }
-    if (this.valForm.valid) {
-      const { email, password } = this.valForm.value;
-      this._store.dispatch(login({ email, password }))
+    if (this.loginForm.valid) {
+      this._store.dispatch(login(this.loginModel))
     }
   }
-
-  // logout() {
-  //   this._store.dispatch(logout());
-  // }
 
   ngOnInit() { }
 

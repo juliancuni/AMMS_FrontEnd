@@ -4,7 +4,11 @@
         <div class="card card-flat">
             <div class="card-body">
                 <p class="text-center py-2">Krijo llogari te re.</p>
-                <form [formGroup]="valForm" class="form-validate mb-3" role="form" name="registerForm" novalidate=""
+                <form [formGroup]="signupForm" (ngSubmit)="submitSignup()" class="form-validate mb-3">
+                    <formly-form [model]="signupModel" [fields]="fields" [options]="options" [form]="signupForm"></formly-form>
+                    <button type="submit" class="btn btn-block btn-primary mt-3">Krijo Llogari</button>
+                </form>
+                <!-- <form [formGroup]="valForm" class="form-validate mb-3" role="form" name="registerForm" novalidate=""
                     (submit)="submitForm($event)">
                     <div class="form-group">
                         <label class="text-muted mb-1">Emri i plote</label>
@@ -74,8 +78,8 @@
                             Password-et nuk perputhen</div>
                     </div>
                     <button class="btn btn-block btn-primary mt-3" type="submit">Krijo llogari</button>
-                </form>
-                <div class="alert alert-danger text-center"></div>
+                </form> -->
+                <!-- <div class="alert alert-danger text-center"></div> -->
                 <p class="pt-3 text-center">Keni nje llogari?</p>
                 <a class="btn btn-block btn-secondary" [routerLink]="'/login'">Login</a>
             </div>

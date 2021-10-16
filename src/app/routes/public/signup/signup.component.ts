@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { signUp } from 'src/app/shared/store/actions/auth.actions';
+import { AuthState } from 'src/app/shared/store/reducers/auth.reducer';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
     selector: 'app-signup',
@@ -8,68 +14,101 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class SignupComponent implements OnInit {
 
-    valForm: FormGroup;
+    signupForm = new FormGroup({});
+    signupModel = {
+        name: '',
+        email: environment.production ? '' : '',
+        password: environment.production ? '' : '',
+        passwordConfirm: ''
+    };
+
+    options = {}
+    fields: FormlyFieldConfig[] = [{
+        validators: {
+            validation: [
+                { name: 'fieldMatch', options: { errorPath: 'passwordConfirm' } },
+            ],
+        },
+        fieldGroup: [
+            {
+                key: 'name',
+                type: 'input',
+                modelOptions: {
+                    updateOn: 'submit',
+                },
+                templateOptions: {
+                    type: 'text',
+                    label: 'Emri i Plote',
+                    placeholder: 'Emer - Mbiemer',
+                    required: true,
+                }
+            },
+            {
+                key: 'email',
+                type: 'input',
+                modelOptions: {
+                    updateOn: 'submit',
+                },
+                validators: {
+                    validation: ['email'],
+                },
+                templateOptions: {
+                    type: 'email',
+                    label: 'Email',
+                    placeholder: 'email@domain.al',
+                    required: true,
+                }
+            },
+            {
+                key: 'password',
+                type: 'input',
+                modelOptions: {
+                    updateOn: 'submit',
+                },
+                templateOptions: {
+                    type: 'password',
+                    label: 'Fjalekalimi',
+                    placeholder: 'Fjalekalimi te pakten 6 karaktere',
+                    minLength: 6,
+                    maxLength: 32,
+                    required: true,
+                },
+            },
+            {
+                key: 'passwordConfirm',
+                type: 'input',
+                modelOptions: {
+                    updateOn: 'submit',
+                },
+                templateOptions: {
+                    type: 'password',
+                    label: 'Konfirmo Fjalekalimin',
+                    placeholder: 'Perserisni fjalekalimin',
+                    required: true,
+                },
+            },
+        ],
+    }];
 
     constructor(
-        private fb: FormBuilder,
         private readonly _store: Store<AuthState>
     ) {
-        this.valForm = fb.group({
-            emriIPlote: ['Auiu LaverBariu', Validators.required],
-            email: ['auiu@laverbariu.com', [Validators.required, Validators.email]],
-            password: ['123456', [Validators.required, Validators.minLength(6), Validators.maxLength(32)]],
-            confirmPassword: ['123456', Validators.required],
-        }, {
-            validators: [Validation.match('password', 'confirmPassword')]
-        });
     }
 
-    get f(): { [key: string]: AbstractControl } {
-        return this.valForm.controls;
-    }
+    submitSignup() {
 
-    submitForm($ev: any) {
-        $ev.preventDefault();
-        for (let c in this.valForm.controls) {
-            this.valForm.controls[c].markAsTouched();
+        if (this.signupForm.valid) {
+            console.log(this.signupModel)
+            const { name, email, password } = this.signupModel
+            this._store.dispatch(signUp({ name, email, password }))
         }
-        if (this.valForm.valid) {
-            let { email, password, emriIPlote } = this.valForm.value;
-            this._store.dispatch(signUp({ email, password, name: emriIPlote }))
-        }
+
+
     }
 
     ngOnInit() {
     }
-
-
 }
 
 
 
-import { AbstractControl, ValidatorFn } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { signUp } from 'src/app/shared/store/actions/auth.actions';
-import { AuthState } from 'src/app/shared/store/reducers/auth.reducer';
-
-export default class Validation {
-
-    static match(controlName: string, checkControlName: string): ValidatorFn {
-        return (controls: AbstractControl) => {
-            const control = controls.get(controlName);
-            const checkControl = controls.get(checkControlName);
-
-            if (checkControl!.errors && checkControl!.errors.matching) {
-                return null;
-            }
-
-            if (control!.value !== checkControl!.value) {
-                // @ts-ignore: Object is possibly 'null'.
-                controls.get(checkControlName).setErrors({ matching: true });
-                return { matching: true };
-            } else {
-                return null;
-            }
-        };
-    }
-}

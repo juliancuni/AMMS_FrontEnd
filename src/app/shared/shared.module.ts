@@ -11,7 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-
+import { config } from './helpers/formly.config'
 @NgModule({
   declarations: [],
   imports: [
@@ -21,10 +21,7 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
     ModalModule.forRoot(),
     ButtonsModule.forRoot(),
     ToastrModule.forRoot(),
-    FormlyModule.forRoot({
-      extras: { lazyRender: true },
-      validationMessages: [{ name: 'required', message: 'S\'mund te lihet bosh' },],
-    }),
+    FormlyModule.forRoot(config),
     FormlyBootstrapModule,
 
   ],
