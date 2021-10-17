@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IAccount } from '../appwritesdk/models/account.interface';
 import { AuthState } from '../store/reducers/auth.reducer';
 import { thisUser } from '../store/selectors/auth.selectors';
 
@@ -22,6 +21,10 @@ export class EmailVerificationGuard implements CanActivate {
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return this._store.pipe(select(thisUser),
             map((loggedInAccount) => {
+                console.log(loggedInAccount)
+                if (loggedInAccount === null) {
+                    return true;
+                }
                 if (!loggedInAccount?.emailVerification) {
                     this._router.navigateByUrl('/email-verification');
                     return false;

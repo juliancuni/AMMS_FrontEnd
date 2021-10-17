@@ -21,7 +21,7 @@ export function fieldMatchValidator(control: AbstractControl) {
     if (passwordConfirm === password) {
         return null;
     }
-    return { fieldMatch: { message: 'Password Not Matching' } };
+    return { fieldMatch: { message: 'Fjalekalimet nuk perputhen' } };
 }
 
 export const config = {

@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SignupComponent } from './signup/signup.component';
-import { EmailVerificationComponent } from './email-verification/email-verification.component';
+// import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { EmailVerifyComponent } from './email-verify/email-verify.component';
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
   declarations: [
     LoginComponent,
     SignupComponent,
-    EmailVerificationComponent,
+    // EmailVerificationComponent,
     EmailVerifyComponent,
   ],
   imports: [

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { ApiHelper } from '../api.helper';
+import { ApiHelper } from '../../helpers/api.helper';
 import { IDocList } from '../models/doc_list.interface';
 import { IMenu } from '../models/menu.interface';
 

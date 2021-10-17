@@ -16,10 +16,10 @@ export class SignupComponent implements OnInit {
 
     signupForm = new FormGroup({});
     signupModel = {
-        name: '',
-        email: environment.production ? '' : '',
-        password: environment.production ? '' : '',
-        passwordConfirm: ''
+        name: environment.production ? '' :'Julian Cuni',
+        email: environment.production ? '' : 'julian.cuni@microservices.al',
+        password: environment.production ? '' : '123456',
+        passwordConfirm: environment.production ? '' :'123456'
     };
 
     options = {}
@@ -102,8 +102,6 @@ export class SignupComponent implements OnInit {
             const { name, email, password } = this.signupModel
             this._store.dispatch(signUp({ name, email, password }))
         }
-
-
     }
 
     ngOnInit() {

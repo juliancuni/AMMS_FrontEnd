@@ -16,7 +16,6 @@ export class UserblockComponent implements OnInit {
   constructor(
     private readonly _store: Store<AppState>,
   ) {
-    this._store.dispatch(whoAmI()); 
     this.thisUser$ = this._store.pipe(select(thisUser)) as Observable<IAccount>;
   }
 

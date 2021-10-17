@@ -7,6 +7,7 @@ import { PrivateFooterComponent } from './private-footer/private-footer.componen
 import { PrivateSidebarComponent } from './private-sidebar/private-sidebar.component';
 import { PrivateOffsidebarComponent } from './private-offsidebar/private-offsidebar.component';
 import { UserblockComponent } from './userblock/userblock.component';
+import { EmailVerificationComponent } from 'src/app/routes/public/email-verification/email-verification.component';
 
 
 
@@ -17,7 +18,8 @@ import { UserblockComponent } from './userblock/userblock.component';
     PrivateFooterComponent,
     PrivateSidebarComponent,
     PrivateOffsidebarComponent,
-    UserblockComponent
+    UserblockComponent,
+    EmailVerificationComponent,
   ],
   imports: [
     CommonModule,

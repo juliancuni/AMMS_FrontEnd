@@ -20,6 +20,7 @@ export class EmailVerificationComponent implements OnInit {
         private readonly _router: Router
     ) {
         this.isAuthenticated$ = this._store.pipe(select(isAuthenticated));
+        this.resend();
     }
 
     resend() {

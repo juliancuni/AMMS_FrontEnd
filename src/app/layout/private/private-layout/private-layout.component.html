@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="(loggedInAccount$ | async)?.emailVerification; else verify">
     <!-- top navbar-->
     <app-private-header class="topnavbar-wrapper"></app-private-header>
     <!-- sidebar-->
@@ -15,3 +15,15 @@
     <!-- Page footer-->
     <footer class="footer-container" app-private-footer></footer>
 </div>
+
+
+<ng-template #verify>
+    <!-- <div *ngIf="loggedInAccount$ | async; else loading"> -->
+        <app-email-verification *ngIf="loggedInAccount$ | async"></app-email-verification>
+        <!-- <div>verify ...</div> -->
+
+    <!-- </div> -->
+    <!-- <ng-template #loading>
+        <div>Loading ...</div>
+    </ng-template> -->
+</ng-template>

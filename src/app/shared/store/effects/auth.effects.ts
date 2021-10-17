@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import {
     createEmailVerification,
     login,
@@ -68,7 +68,7 @@ export class AuthEffects {
 
     whoAmI$ = createEffect(() => this.actions$.pipe(
         ofType(whoAmI),
-        exhaustMap(() => this._accountService.whoAmI().pipe(
+        switchMap(() => this._accountService.whoAmI().pipe(
             concatMap((account) => {
                 return [
                     whoAmISuccess({ loggedInAccount: account }),

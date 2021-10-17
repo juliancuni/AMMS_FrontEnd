@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { ApiHelper } from '../api.helper';
+import { ApiHelper } from '../../helpers/api.helper';
 import { IAppSession } from '../models/session.interface';
 import { IAccount } from '../models/account.interface';
 
