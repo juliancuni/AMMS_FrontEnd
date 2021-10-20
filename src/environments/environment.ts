@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  APPWRITE_ENDPOINT: "http://Dev-Ubuntu/v1",
+  APPWRITE_ENDPOINT: "http://server.home/v1",
   APPWRITE_PROJECTID: "616344ff267f5",
   VERIFICATION_EMAIL_LINK: "http://localhost:4200/email-verify"
 

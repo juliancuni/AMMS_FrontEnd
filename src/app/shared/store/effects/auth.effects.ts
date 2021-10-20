@@ -30,7 +30,6 @@ export class AuthEffects {
                 concatMap((_) => {
                     this._router.navigateByUrl("/app");
                     return [
-                        whoAmI(),
                         loginSuccess(),
                     ]
                 }),
@@ -97,8 +96,6 @@ export class AuthEffects {
         ofType(createEmailVerification),
         tap(() => this._accountService.createVerification().pipe(map((res) => {
             this._router.navigateByUrl('/email-verification')
-            console.log("duke derguar email")
-            console.log(res)
         })),
 
         )
@@ -106,9 +103,7 @@ export class AuthEffects {
 
     updateEmailVerification$ = createEffect(() => this.actions$.pipe(
         ofType(updateEmailVerification),
-        tap(({ userId, secret }) => this._accountService.updateVerification(userId, secret).pipe(
-            map((res) => console.log(res))
-        ))
+        tap(({ userId, secret }) => this._accountService.updateVerification(userId, secret))
     ), { dispatch: false })
 
     constructor(

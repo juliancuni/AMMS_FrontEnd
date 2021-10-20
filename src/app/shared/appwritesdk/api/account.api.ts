@@ -31,6 +31,7 @@ export class AccountApi {
     }
 
     whoAmI(): Observable<IAccount> {
+        // ApiHelper.provider().locale.getCurrencies().then((loc) => console.log(loc))
         return from(ApiHelper.provider().account.get() as Promise<IAccount>);
     }
 }

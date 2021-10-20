@@ -17,7 +17,6 @@ export class PrivateLayoutComponent implements OnInit {
   constructor(
     private readonly _store: Store<AuthState>
   ) {
-    this._store.dispatch(whoAmI()); 
     this.loggedInAccount$ = this._store.pipe(select(thisUser))
 
   }

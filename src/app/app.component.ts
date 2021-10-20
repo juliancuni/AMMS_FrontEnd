@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   constructor(
     private readonly _store: Store<AppState>,
   ) {
-    // this._store.dispatch(whoAmI())
   }
 
   ngOnInit() {

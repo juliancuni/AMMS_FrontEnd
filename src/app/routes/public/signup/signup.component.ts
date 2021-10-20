@@ -98,7 +98,6 @@ export class SignupComponent implements OnInit {
     submitSignup() {
 
         if (this.signupForm.valid) {
-            console.log(this.signupModel)
             const { name, email, password } = this.signupModel
             this._store.dispatch(signUp({ name, email, password }))
         }
