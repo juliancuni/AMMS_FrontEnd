@@ -29,7 +29,6 @@
     "@ngrx/store-devtools": "^12.4.0",
     "@ngx-formly/bootstrap": "^5.0.0",
     "@ngx-formly/core": "^5.0.0",
-    "@openapitools/openapi-generator-cli": "^2.4.1",
     "appwrite": "^4.0.3",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",

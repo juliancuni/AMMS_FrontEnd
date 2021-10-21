@@ -127,6 +127,7 @@
   },
   "defaultProject": "AutoMotiveFrontEnd",
   "cli": {
+    "analytics": "54aa7a8a-119b-429f-a265-80f982074a1e",
     "defaultCollection": "@ngrx/schematics"
   }
 }
