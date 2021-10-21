@@ -5,21 +5,22 @@ import { addNewUserSuccess, deleteUserSuccess, getUsersSuccess, updateUserSucces
 
 export const userFeatureKey = 'users';
 
-export interface UserState extends EntityState<IAccount> { }
+export interface UserState extends EntityState<IAccount> {
+}
 
 export const usersAdapter = createEntityAdapter<IAccount>({
-  selectId: user => user.$id
+    selectId: user => user.$id
 });
 
 export const initialState: UserState = usersAdapter.getInitialState({
 });
 
 export const userReducer = createReducer(
-  initialState,
-  on(getUsersSuccess, (state, { users }) => usersAdapter.setAll(users, state)),
-  on(addNewUserSuccess, (state, { user }) => usersAdapter.addOne(user, state)),
-  on(updateUserSuccess, (state, { user }) => usersAdapter.updateOne({ id: user.$id as string, changes: user }, state)),
-  on(deleteUserSuccess, (state, { user }) => usersAdapter.removeOne(user.$id as string, state)),
+    initialState,
+    on(getUsersSuccess, (state, { users }) => usersAdapter.setAll(users, state)),
+    on(addNewUserSuccess, (state, { user }) => usersAdapter.addOne(user, state)),
+    on(updateUserSuccess, (state, { user }) => usersAdapter.updateOne({ id: user.$id as string, changes: user }, state)),
+    on(deleteUserSuccess, (state, { user }) => usersAdapter.removeOne(user.$id as string, state)),
 );
 
 export const { selectAll } = usersAdapter.getSelectors();

@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-
 import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { ApiModule } from './shared/sdk/api.module';
-import { Configuration } from './shared/sdk';
+import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './shared/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -17,16 +13,10 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { AuthEffects } from './shared/store/effects/auth.effects';
-// import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { UiEffects } from './shared/store/effects/ui.effects';
 import { MenuEffects } from './shared/store/effects/menu.effects';
-import { EntityDataModule } from '@ngrx/data';
-import { entityConfig } from './entity-metadata';
 import { ReactiveFormsModule } from '@angular/forms';
-
-const apiConf = () => {
-  return new Configuration({ basePath: "http://localhost:3000" })
-};
+import { UserEffects } from './shared/store/effects/user.effects';
 
 @NgModule({
   declarations: [
@@ -39,7 +29,6 @@ const apiConf = () => {
     RoutesModule,
     SharedModule.forRoot(),
     LayoutModule,
-    // ApiModule.forRoot(apiConf),
     StoreModule.forRoot(reducers,
       {
         metaReducers,
@@ -60,17 +49,15 @@ const apiConf = () => {
         autoPause: true
       }
     ),
-    EffectsModule.forRoot([AuthEffects, UiEffects, MenuEffects]),
+    EffectsModule.forRoot([AuthEffects, UiEffects, MenuEffects, UserEffects]),
     StoreRouterConnectingModule.forRoot(
       {
         stateKey: 'router',
         routerState: RouterState.Minimal
       }
     ),
-    EntityDataModule.forRoot(entityConfig),
     ReactiveFormsModule,
   ],
-  // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

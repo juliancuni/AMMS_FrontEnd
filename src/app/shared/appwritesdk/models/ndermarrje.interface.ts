@@ -1,4 +1,4 @@
-export interface INdermarrja {
+export interface INdermarrje {
     $id?: string,
     emri: string,
     nius: string,

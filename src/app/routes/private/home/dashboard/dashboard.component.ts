@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
-import { INdermarrja } from 'src/app/shared/appwritesdk/models/ndermarrja.interface';
+import { INdermarrje } from 'src/app/shared/appwritesdk/models/ndermarrje.interface';
 import { AppState } from 'src/app/shared/store';
-import { selectAllNdermarrje } from 'src/app/shared/store/selectors/ndermarrja.selectors';
+import { setUserPrefs } from 'src/app/shared/store/actions/user.actions';
+import { selectAllNdermarrje } from 'src/app/shared/store/selectors/ndermarrje.selectors';
 
 @Component({
     selector: 'app-dashboard',
@@ -14,44 +13,21 @@ import { selectAllNdermarrje } from 'src/app/shared/store/selectors/ndermarrja.s
 })
 export class DashboardComponent implements OnInit {
 
-    ndermarrje$: Observable<INdermarrja[]>;
+    ndermarrjet$: Observable<INdermarrje[]>;
 
     constructor(
         private readonly _store: Store<AppState>,
     ) {
-        this.ndermarrje$ = this._store.pipe(select(selectAllNdermarrje))
+        this.ndermarrjet$ = this._store.pipe(select(selectAllNdermarrje))
     }
 
-    form = new FormGroup({});
-    model = { email: 'email@gmail.com' };
-    fields: FormlyFieldConfig[] = [
-        {
-            key: 'email',
-            type: 'input',
-            templateOptions: {
-                type: 'email',
-                // label: 'Email address',
-                placeholder: 'Enter email',
-                required: true,
-            }
-        },
-        {
-            key: 'password',
-            type: 'input',
-            templateOptions: {
-                type: 'password',
-                // label: 'Password',
-                placeholder: 'Enter Password',
-                required: true,
-            }
-        }
-    ];
-
-    onSubmit(model: any) {
-        console.log(model);
+    setPrefs() {
+        this._store.dispatch(setUserPrefs({ userPrefs: null }))
     }
 
     ngOnInit(): void {
+        console.log("dispatch setprefs")
+
     }
 
 }

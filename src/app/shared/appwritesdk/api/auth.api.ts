@@ -23,15 +23,14 @@ export class AccountApi {
     }
 
     createVerification() {
-        return from(ApiHelper.provider().account.createVerification(environment.VERIFICATION_EMAIL_LINK) as Promise<any>)
+        return from(ApiHelper.provider().account.createVerification(environment.VERIFICATION_EMAIL_LINK) as Promise<any>);
     }
 
     updateVerification(userId: string, secret: string) {
-        return from(ApiHelper.provider().account.updateVerification(userId, secret) as Promise<any>)
+        return from(ApiHelper.provider().account.updateVerification(userId, secret) as Promise<any>);
     }
 
     whoAmI(): Observable<IAccount> {
-        // ApiHelper.provider().locale.getCurrencies().then((loc) => console.log(loc))
         return from(ApiHelper.provider().account.get() as Promise<IAccount>);
     }
 }

@@ -1,7 +1,6 @@
 import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { IAccount } from '../../appwritesdk/models/account.interface';
-import { UserDto } from '../../sdk';
 
 /** Load Users */
 export const getUsers = createAction(
@@ -65,4 +64,20 @@ export const deleteUserFailure = createAction(
   '[Effect deleteUser$] delete User Failure',
   props<{ error: any }>()
 );
+
+export const setUserPrefs = createAction(
+  '[Set User Prefs]',
+  props<{userPrefs: any}>()
+)
+
+export const setUserPrefsSuccess = createAction(
+  '[Set User Prefs] Success',
+  props<{userPrefs: any}>()
+)
+
+export const setUserPrefsFailure = createAction(
+  '[Set User Prefs] Failure',
+  props<{error: any}>()
+)
+
 

@@ -14,4 +14,8 @@ export class UserApi {
     getUsers() {
         return from(ApiHelper.provider().database.listDocuments(this.perdoruesitCollectionId) as Promise<any>)
     }
+
+    setUserPrefs(prefs: any) {
+        return from(ApiHelper.provider().account.updatePrefs(prefs) as Promise<any>);
+    }
 }

@@ -4,59 +4,45 @@ import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map } from 'rxjs/operators';
 import { UserApi } from '../../appwritesdk/api/user.api';
 import { toastrError } from '../actions/ui.actions';
-import { addNewUser, addNewUserSuccess, deleteUser, deleteUserSuccess, getUsers, getUsersFailure, getUsersSuccess, updateUser, updateUserSuccess } from '../actions/user.actions';
+import {
+    addNewUser,
+    addNewUserSuccess,
+    deleteUser,
+    deleteUserSuccess,
+    getUsers,
+    getUsersFailure,
+    getUsersSuccess,
+    setUserPrefs,
+    setUserPrefsSuccess,
+    updateUser,
+    updateUserSuccess
+} from '../actions/user.actions';
 
 @Injectable()
 export class UserEffects {
 
-  getUsers$ = createEffect(() => this.actions$.pipe(
-    ofType(getUsers),
-    exhaustMap(() => this._userService.getUsers().pipe(
-      map((res) => getUsersSuccess({ users: res.documents }))
-    )),
-    catchError((err) => of(toastrError({ error: err.message })))
-  ))
+    getUsers$ = createEffect(() => this.actions$.pipe(
+        ofType(getUsers),
+        exhaustMap(() => this._userService.getUsers().pipe(
+            map((res) => getUsersSuccess({ users: res.documents }))
+        )),
+        catchError((err) => of(toastrError({ error: err.message })))
+    ))
 
-  // loadUsers$ = createEffect(() => this.actions$.pipe(
-  //   ofType(loadUsers),
-  //   concatMap(() => this._userService.usersControllerFindAll(1, 10, ['roles'], JSON.stringify({}))),
-  //   map((response) => {
-  //     // TODO Meta (pagenr, nritems etc) interface ....
-  //     // console.log(response.items)
-  //     return loadUsersSuccess({ users: response.items })
-  //   })
-  // ));
+    setUserPrefs$ = createEffect(() => this.actions$.pipe(
+        ofType(setUserPrefs),
+        exhaustMap(({ userPrefs }) => this._userService.setUserPrefs(userPrefs).pipe(
+            map((res) => {
+                console.log(res)
+                return setUserPrefsSuccess(res)
+            })
+        )),
+        catchError((err) => of(toastrError({ error: err })))
+    ))
 
-  // addNewUser$ = createEffect(() => this.actions$.pipe(
-  //   ofType(addNewUser),
-  //   concatMap((action) => this._userService.usersControllerCreateUser(action.user)),
-  //   map((user) => {
-  //     // console.log(user);
-  //     return addNewUserSuccess({ user })
-  //   })
-  // ));
-
-  // updateUser$ = createEffect(() => this.actions$.pipe(
-  //   ofType(updateUser),
-  //   concatMap(({ update }) => this._userService.usersControllerUpdateUser(update.id as string, update.changes)),
-  //   map((user: any) => {
-  //     // console.log(user);
-  //     return updateUserSuccess({ user })
-  //   })
-  // ));
-
-  // deleteUser$ = createEffect(() => this.actions$.pipe(
-  //   ofType(deleteUser),
-  //   concatMap(({ id }) => this._userService.usersControllerDeleteUser(id)),
-  //   map((user: any) => {
-  //     // console.log(user);
-  //     return deleteUserSuccess({ user })
-  //   })
-  // ));
-
-  constructor(
-    private actions$: Actions,
-    private readonly _userService: UserApi,
-  ) { }
+    constructor(
+        private actions$: Actions,
+        private readonly _userService: UserApi,
+    ) { }
 
 }

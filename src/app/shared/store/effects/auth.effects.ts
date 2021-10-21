@@ -17,7 +17,7 @@ import {
     whoAmISuccess
 } from '../actions/auth.actions';
 import { toastrError, toastrSuccess } from '../actions/ui.actions';
-import { AccountApi } from '../../appwritesdk/api/account.api';
+import { AccountApi } from '../../appwritesdk/api/auth.api';
 
 
 @Injectable()

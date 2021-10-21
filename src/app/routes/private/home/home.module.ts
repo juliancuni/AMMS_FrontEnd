@@ -5,8 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ndermarrjaFeatureKey, ndermarrjaReducer } from 'src/app/shared/store/reducers/ndermarrja.reducer';
-import { NdermarrjaEffects } from 'src/app/shared/store/effects/ndermarrja.effects';
+import { ndermarrjeFeatureKey, ndermarrjeReducer } from 'src/app/shared/store/reducers/ndermarrje.reducer';
+import { NdermarrjeEffects } from 'src/app/shared/store/effects/ndermarrje.effects';
+import { NdermarrjeModalComponent } from '../../shared-componenets/ndermarrje-modal/ndermarrje-modal.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent }
@@ -14,14 +15,15 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    NdermarrjeModalComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule,    
-    StoreModule.forFeature(ndermarrjaFeatureKey, ndermarrjaReducer),
-    EffectsModule.forFeature([NdermarrjaEffects]),
+    SharedModule,
+    StoreModule.forFeature(ndermarrjeFeatureKey, ndermarrjeReducer),
+    EffectsModule.forFeature([NdermarrjeEffects]),
 
   ]
 })
