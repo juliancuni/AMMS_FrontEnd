@@ -7,7 +7,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ndermarrjeFeatureKey, ndermarrjeReducer } from 'src/app/shared/store/reducers/ndermarrje.reducer';
 import { NdermarrjeEffects } from 'src/app/shared/store/effects/ndermarrje.effects';
-import { NdermarrjeModalComponent } from '../../shared-componenets/ndermarrje-modal/ndermarrje-modal.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent }
@@ -16,7 +15,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
-    NdermarrjeModalComponent,
   ],
   imports: [
     CommonModule,

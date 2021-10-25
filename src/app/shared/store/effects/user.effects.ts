@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map } from 'rxjs/operators';
 import { UserApi } from '../../appwritesdk/api/user.api';
+import { whoAmI } from '../actions/auth.actions';
 import { toastrError } from '../actions/ui.actions';
 import {
     addNewUser,
@@ -34,7 +35,7 @@ export class UserEffects {
         exhaustMap(({ userPrefs }) => this._userService.setUserPrefs(userPrefs).pipe(
             map((res) => {
                 console.log(res)
-                return setUserPrefsSuccess(res)
+                return whoAmI()
             })
         )),
         catchError((err) => of(toastrError({ error: err })))

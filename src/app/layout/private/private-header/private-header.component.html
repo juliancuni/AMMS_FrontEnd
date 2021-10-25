@@ -1,16 +1,22 @@
 <nav class="navbar topnavbar" role="navigation">
     <div class="navbar-header">
         <a class="navbar-brand" [routerLink]="'/app'">
-            <!-- <div class="brand-logo">
-                <img class="img-fluid" src="assets/img/logo_tmp.png" width="30" alt="App Logo" />
-                <span style="color: white;">AMR</span>
+            <div class="brand-logo" *ngIf="(ndermarrjeEzgjedhur$ | async) as ndermarrjeEzgjedhur">
+                <img class="img-fluid" [src]="ndermarrjeEzgjedhur?.logo || 'assets/img/logo_tmp.png'" width="30"
+                    alt="App Logo" />
+                <span style="color: white;">{{ndermarrjeEzgjedhur?.emri || 'N/A'}}</span>
             </div>
             <div class="brand-logo-collapsed">
                 <img class="img-fluid" src="assets/img/logo_tmp.png" alt="App Logo" />
-            </div> -->
+            </div>
         </a>
     </div>
     <ul class="navbar-nav flex-row">
+        <li class="nav-item" title="Ndermarrje e zgjedhur">
+            <a class="nav-link">
+                {{(ndermarrjeEzgjedhur$ | async)?.emri}}
+            </a>
+        </li>
         <li class="nav-item" title="Logout" (click)="logout()">
             <a class="nav-link">
                 <em class="icon-logout"></em>

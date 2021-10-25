@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { INdermarrje } from 'src/app/shared/appwritesdk/models/ndermarrje.interface';
 import { AppState } from 'src/app/shared/store';
 import { setUserPrefs } from 'src/app/shared/store/actions/user.actions';
-import { selectAllNdermarrje } from 'src/app/shared/store/selectors/ndermarrje.selectors';
+import { selectNdermarrjet } from 'src/app/shared/store/selectors/ndermarrje.selectors';
 
 @Component({
     selector: 'app-dashboard',
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
     }
 
     resetPrefs() {
-        this._store.dispatch(setUserPrefs({userPrefs: {}}))
+        this._store.dispatch(setUserPrefs({ userPrefs: {} }))
     }
 
     ngOnInit(): void {

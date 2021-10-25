@@ -8,6 +8,7 @@ import { PrivateSidebarComponent } from './private-sidebar/private-sidebar.compo
 import { PrivateOffsidebarComponent } from './private-offsidebar/private-offsidebar.component';
 import { UserblockComponent } from './userblock/userblock.component';
 import { EmailVerificationComponent } from 'src/app/routes/public/email-verification/email-verification.component';
+import { NdermarrjeModule } from 'src/app/routes/private/ndermarrje/ndermarrje.module';
 
 
 
@@ -24,7 +25,7 @@ import { EmailVerificationComponent } from 'src/app/routes/public/email-verifica
   imports: [
     CommonModule,
     SharedModule,
-
+    NdermarrjeModule,
   ],
   exports: [
     PrivateLayoutComponent,

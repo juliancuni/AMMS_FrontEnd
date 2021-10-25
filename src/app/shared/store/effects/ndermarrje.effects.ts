@@ -15,9 +15,8 @@ export class NdermarrjeEffects {
     getNdermarrje$ = createEffect(() => this.actions$.pipe(
         ofType(getNdermarrjet),
         exhaustMap(() => this._ndermarrjeervice.getNdermarrje().pipe(
-            map(({ documents }) => {
-                console.log(documents)
-                return getNdermarrjetSuccess({ ndermarrjet: documents })
+            map((res) => {
+                return getNdermarrjetSuccess({ ndermarrjet: res.documents })
             }),
             catchError((error) => {
                 console.log(error.message)
@@ -26,10 +25,10 @@ export class NdermarrjeEffects {
         ))
     ))
 
-    setLocalStorage$ = createEffect(() => this.actions$.pipe(
-        ofType(zgjidhNdermarrje),
-        tap(({ ndermarrje }) => localStorage.setItem('ndermarrje', JSON.stringify(ndermarrje)))
-    ), { dispatch: false })
+    // setLocalStorage$ = createEffect(() => this.actions$.pipe(
+    //     ofType(zgjidhNdermarrje),
+    //     tap(({ ndermarrje }) => localStorage.setItem('ndermarrje', JSON.stringify(ndermarrje)))
+    // ), { dispatch: false })
 
     constructor(
         private actions$: Actions,

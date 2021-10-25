@@ -5,7 +5,10 @@
     </button>
 </div>
 <div class="modal-body">
-    <!-- {{data | json}} -->
+    <form [formGroup]="ndermarrjeForm" (ngSubmit)="submitNdermarrje()" class="form-validate mb-3">
+        <formly-form [model]="ndermarrjeModel" [fields]="fields" [options]="options" [form]="ndermarrjeForm"></formly-form>
+        <button type="submit" class="btn btn-block btn-primary mt-3">Krijo Ndermarrje</button>
+    </form>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>

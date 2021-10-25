@@ -5,5 +5,9 @@ export interface IAccount {
     name: string;
     registration: number;
     status: number;
-    prefs: object;
+    prefs: Prefs;
 };
+
+interface Prefs {
+    ndermarrje: string
+}

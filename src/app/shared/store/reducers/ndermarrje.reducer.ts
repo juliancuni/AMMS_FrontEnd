@@ -6,7 +6,7 @@ import { getNdermarrjetSuccess, zgjidhNdermarrje } from '../actions/ndermarrje.a
 
 export const ndermarrjeFeatureKey = 'ndermarrjet';
 export interface NdermarrjeState extends EntityState<INdermarrje> {
-  ndermarrjeEZgjedhur: INdermarrje | null
+  // ndermarrjeEZgjedhur: INdermarrje | null
 }
 
 export const ndermarrjeAdapter = createEntityAdapter<INdermarrje>({
@@ -14,13 +14,13 @@ export const ndermarrjeAdapter = createEntityAdapter<INdermarrje>({
 });
 
 export const initialState: NdermarrjeState = ndermarrjeAdapter.getInitialState({
-  ndermarrjeEZgjedhur: null
+  // ndermarrjeEZgjedhur: null
 });
 
 export const ndermarrjeReducer = createReducer(
   initialState,
   on(getNdermarrjetSuccess, (state, { ndermarrjet }) => ndermarrjeAdapter.setAll(ndermarrjet, state)),
-  on(zgjidhNdermarrje, (state, { ndermarrje }) => ({ ...state, ndermarrjeEZgjedhur: ndermarrje })),
+  // on(zgjidhNdermarrje, (state, { ndermarrje }) => ({ ...state, ndermarrjeEZgjedhur: ndermarrje })),
 );
 
-export const { selectAll } = ndermarrjeAdapter.getSelectors();
+export const { selectAll, selectEntities } = ndermarrjeAdapter.getSelectors();
