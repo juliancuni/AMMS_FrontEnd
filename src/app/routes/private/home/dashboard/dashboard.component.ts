@@ -13,20 +13,16 @@ import { selectAllNdermarrje } from 'src/app/shared/store/selectors/ndermarrje.s
 })
 export class DashboardComponent implements OnInit {
 
-    ndermarrjet$: Observable<INdermarrje[]>;
-
     constructor(
         private readonly _store: Store<AppState>,
     ) {
-        this.ndermarrjet$ = this._store.pipe(select(selectAllNdermarrje))
     }
 
-    setPrefs() {
-        this._store.dispatch(setUserPrefs({ userPrefs: null }))
+    resetPrefs() {
+        this._store.dispatch(setUserPrefs({userPrefs: {}}))
     }
 
     ngOnInit(): void {
-        console.log("dispatch setprefs")
 
     }
 

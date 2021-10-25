@@ -1,26 +1,45 @@
 <div class="wrapper" *ngIf="(loggedInAccount$ | async)?.emailVerification; else verify">
-    <!-- top navbar-->
     <app-private-header class="topnavbar-wrapper"></app-private-header>
-    <!-- sidebar-->
-    <app-private-sidebar class="aside-container"></app-private-sidebar>
-    <!-- offsidebar-->
-    <app-private-offsidebar class="offsidebar"></app-private-offsidebar>
-    <!-- Main section-->
-    <section class="section-container">
-        <!-- Page content-->
-        <div class="content-wrapper">
-            <router-outlet></router-outlet>
+    <div *ngIf="(loggedInAccount$ | async)?.prefs!.hasOwnProperty('ndermarrje'); else zgjidhNdermarrje">
+        <!-- top navbar-->
+        <!-- sidebar-->
+        <app-private-sidebar class="aside-container"></app-private-sidebar>
+        <!-- offsidebar-->
+        <app-private-offsidebar class="offsidebar"></app-private-offsidebar>
+        <!-- Main section-->
+        <section class="section-container">
+            <!-- Page content-->
+            <div class="content-wrapper">
+                <router-outlet></router-outlet>
+            </div>
+        </section>
+    </div>
+    <ng-template #zgjidhNdermarrje>
+        <div *ngIf="(ndermarrjet$ | async)!.length > 0; else regNdermarrje">
+            <table>
+                <tr *ngFor="let ndermarrje of (ndermarrjet$ | async)">
+                    <td>{{ndermarrje?.emri}}</td>
+                    <td>{{ndermarrje?.nius}}</td>
+                    <td>{{ndermarrje?.logo}}</td>
+                    <td>{{ndermarrje?.tel}}</td>
+                    <td>{{ndermarrje?.email}}</td>
+                    <td>{{ndermarrje?.website}}</td>
+                    <td><button (click)="regNderPrefs(ndermarrje)" type="submit"> Zgjidh</button></td>
+                </tr>
+            </table>
         </div>
-    </section>
+        <ng-template #regNdermarrje>
+            Regjistro Ndermarrje
+        </ng-template>
+    </ng-template>
     <!-- Page footer-->
     <footer class="footer-container" app-private-footer></footer>
 </div>
 
-
 <ng-template #verify>
     <!-- <div *ngIf="loggedInAccount$ | async; else loading"> -->
-        <app-email-verification *ngIf="loggedInAccount$ | async"></app-email-verification>
-        <!-- <div>verify ...</div> -->
+    <app-email-verification *ngIf="loggedInAccount$ | async"></app-email-verification>
+    <!-- <div>verify ...</div> -->
 
     <!-- </div> -->
     <!-- <ng-template #loading>

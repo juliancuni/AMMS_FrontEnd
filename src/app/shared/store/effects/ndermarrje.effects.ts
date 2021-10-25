@@ -16,6 +16,7 @@ export class NdermarrjeEffects {
         ofType(getNdermarrjet),
         exhaustMap(() => this._ndermarrjeervice.getNdermarrje().pipe(
             map(({ documents }) => {
+                console.log(documents)
                 return getNdermarrjetSuccess({ ndermarrjet: documents })
             }),
             catchError((error) => {

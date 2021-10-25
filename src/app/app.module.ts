@@ -17,6 +17,7 @@ import { UiEffects } from './shared/store/effects/ui.effects';
 import { MenuEffects } from './shared/store/effects/menu.effects';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserEffects } from './shared/store/effects/user.effects';
+import { NdermarrjeEffects } from './shared/store/effects/ndermarrje.effects';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { UserEffects } from './shared/store/effects/user.effects';
         autoPause: true
       }
     ),
-    EffectsModule.forRoot([AuthEffects, UiEffects, MenuEffects, UserEffects]),
+    EffectsModule.forRoot([AuthEffects, UiEffects, MenuEffects, UserEffects, NdermarrjeEffects]),
     StoreRouterConnectingModule.forRoot(
       {
         stateKey: 'router',
