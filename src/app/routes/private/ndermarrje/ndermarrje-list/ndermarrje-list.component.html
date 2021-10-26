@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xl-6">
+    <div class="col">
         <div class="card card-default">
             <div class="card-header">
                 <button class="btn btn-primary btn-xs" (click)="newNdermarrje()" type="submit" title="Ndermarrje e re">
@@ -7,18 +7,31 @@
                 </button>
             </div>
             <div class="card-body">
+                <span *ngIf="(ndermarrjet$ | async)?.length === 0">Regjistroni ndermarrje per te vazhduar</span>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <tr *ngFor="let ndermarrje of (ndermarrjet$ | async)">
+                            <td>
+                                <button class="btn btn-secondary btn-xs" (click)="regNderPrefs(ndermarrje)"
+                                    type="submit">
+                                    Zgjidh
+                                </button>
+                            </td>
                             <td>{{ndermarrje?.emri}}</td>
                             <td>{{ndermarrje?.nius}}</td>
-                            <td>{{ndermarrje?.logo}}</td>
+                            <td><img [src]="ndermarrje?.logo" alt="" width="50"></td>
                             <td>{{ndermarrje?.tel}}</td>
                             <td>{{ndermarrje?.email}}</td>
-                            <td>{{ndermarrje?.website}}</td>
                             <td>
-                                <button class="btn btn-secondary btn-xs" (click)="regNderPrefs(ndermarrje)" type="submit">
-                                    Zgjidh
+                                <a [href]="ndermarrje?.website" target="_blank" rel="noopener noreferrer">{{ndermarrje.website ? 'WEB' : ''}}</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary btn-xs" (click)="edit(ndermarrje)" type="submit">
+                                    Edit
+                                </button>
+                                <button class="ml-2 btn btn-danger btn-xs" (click)="delete(template, ndermarrje)"
+                                    type="submit">
+                                    Delete
                                 </button>
                             </td>
                         </tr>
@@ -28,3 +41,14 @@
         </div>
     </div>
 </div>
+
+
+
+
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>Doni t'a fshini <strong>{{ndermarrje?.emri}}</strong>?</p>
+        <button type="button" class="btn btn-default" (click)="confirm()">Po</button>
+        <button type="button" class="btn btn-primary" (click)="decline()">Jo</button>
+    </div>
+</ng-template>

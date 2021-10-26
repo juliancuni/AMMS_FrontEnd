@@ -15,23 +15,32 @@ export const getNdermarrjetSuccess = createAction(
 
 export const updateNdermarrje = createAction(
   '[Ndermarrja] Update Ndermarrje',
-  props<{ ndermarrje: Update<INdermarrje> }>()
+  props<{ ndermarrje: INdermarrje }>()
 );
 
 export const updateNdermarrjeSuccess = createAction(
   '[update Ndermarrja] Success',
-  props<{ ndermarrje: INdermarrje }>()
+  props<{ update: Update<INdermarrje> }>()
 );
-
 
 export const createNdermarrje = createAction(
   '[Ndermarrja] Create Ndermarrja',
-  props<{ ndermarrje: Update<INdermarrje> }>()
+  props<{ ndermarrje: INdermarrje }>()
 );
 
 export const createNdermarrjeSuccess = createAction(
   '[Create Ndermarrja] Success',
   props<{ ndermarrje: INdermarrje }>()
+);
+
+export const deleteNdermarrje = createAction(
+  '[Ndermarrja] Delete Ndermarrja',
+  props<{ id: string }>()
+);
+
+export const deleteNdermarrjeSuccess = createAction(
+  '[Delete Ndermarrja] Success',
+  props<{ id: string }>()
 );
 
 export const zgjidhNdermarrje = createAction(

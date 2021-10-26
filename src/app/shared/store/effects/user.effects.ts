@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map } from 'rxjs/operators';
 import { UserApi } from '../../appwritesdk/api/user.api';
 import { whoAmI } from '../actions/auth.actions';
-import { toastrError } from '../actions/ui.actions';
+import { toastrError, toastrWarning } from '../actions/ui.actions';
 import {
     addNewUser,
     addNewUserSuccess,
@@ -34,9 +34,8 @@ export class UserEffects {
         ofType(setUserPrefs),
         exhaustMap(({ userPrefs }) => this._userService.setUserPrefs(userPrefs).pipe(
             map((res) => {
-                console.log(res)
                 return whoAmI()
-            })
+            }),
         )),
         catchError((err) => of(toastrError({ error: err })))
     ))

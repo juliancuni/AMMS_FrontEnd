@@ -1,6 +1,46 @@
 import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
+import { Component } from '@angular/core';
+import { FieldType } from '@ngx-formly/core';
+
+@Component({
+  selector: 'formly-field-file',
+  template: `
+    <input type="file" [formControl]="$any(formControl)" [formlyAttributes]="field">
+  `,
+})
+export class FormlyFieldFile extends FieldType {}
+
+
+
+import { Directive } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+
+@Directive({
+  // tslint:disable-next-line
+  selector: 'input[type=file]',
+  host: {
+    '(change)': 'onChange($event.target.files)',
+    '(blur)': 'onTouched()',
+  },
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: FileValueAccessor, multi: true },
+  ],
+})
+// https://github.com/angular/angular/issues/7341
+export class FileValueAccessor implements ControlValueAccessor {
+  value: any;
+  onChange = (_: any) => { };
+  onTouched = () => { };
+
+  writeValue(value: any) { }
+  registerOnChange(fn: any) { this.onChange = fn; }
+  registerOnTouched(fn: any) { this.onTouched = fn; }
+}
+
+
+
 export function EmailValidator(control: any): any {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(control.value) ? null : { 'email': true };
 }
@@ -25,6 +65,9 @@ export function fieldMatchValidator(control: AbstractControl) {
 }
 
 export const config = {
+    types: [
+        { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
+      ],
     extras: { lazyRender: true },
     validators: [
         { name: "email", validation: EmailValidator },
@@ -36,3 +79,5 @@ export const config = {
         { name: 'minlength', message: 'Te pakten 6 karaktere' },
     ],
 }
+
+

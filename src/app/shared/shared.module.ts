@@ -11,11 +11,14 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-import { config } from './helpers/formly.config'
+import { config, FileValueAccessor, FormlyFieldFile } from './helpers/formly.config'
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    FormlyFieldFile,
+    FileValueAccessor,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -40,6 +43,8 @@ import { config } from './helpers/formly.config'
     ToastrModule,
     FormlyModule,
     FormlyBootstrapModule,
+    FileValueAccessor,
+    FormlyFieldFile
   ]
 })
 export class SharedModule {
