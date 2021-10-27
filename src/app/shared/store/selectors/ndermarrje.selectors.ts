@@ -20,8 +20,13 @@ export const selectNdermarrjeById = createSelector(
     selectNdermarrjetEntities,
     thisUser,
     (ndermarrjet, user) => {
-        const ndermarrjeId: string = user!.prefs.ndermarrje
-        return ndermarrjet ? ndermarrjet[ndermarrjeId] : null;
+        if (user && 'prefs' in user) {
+            const ndermarrjeId: string = user.prefs.ndermarrje
+            if (ndermarrjet) {
+                return ndermarrjet[ndermarrjeId]
+            }
+        }
+        return;
     }
 )
 
