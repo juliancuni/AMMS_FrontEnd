@@ -14,51 +14,68 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { AuthEffects } from './shared/store/effects/auth.effects';
 import { UiEffects } from './shared/store/effects/ui.effects';
-import { MenuEffects } from './shared/store/effects/menu.effects';
+// import { MenuEffects } from './shared/store/effects/menu.effects';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserEffects } from './shared/store/effects/user.effects';
 import { NdermarrjeEffects } from './shared/store/effects/ndermarrje.effects';
+import { EntityDataModule, EntityDataService } from '@ngrx/data';
+import { entityConfig } from './shared/store/entity-metadata';
+import { MenuDataService } from './shared/store/entity-services/menu-entity.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    RoutesModule,
-    SharedModule.forRoot(),
-    LayoutModule,
-    StoreModule.forRoot(reducers,
-      {
-        metaReducers,
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictActionTypeUniqueness: true,
-          strictStateImmutability: true,
-          strictActionSerializability: true,
-          strictStateSerializability: true,
-          strictActionWithinNgZone: true,
-        }
-      }
-    ),
-    StoreDevtoolsModule.instrument(
-      {
-        maxAge: 25,
-        logOnly: environment.production,
-        autoPause: true
-      }
-    ),
-    EffectsModule.forRoot([AuthEffects, UiEffects, MenuEffects, UserEffects, NdermarrjeEffects]),
-    StoreRouterConnectingModule.forRoot(
-      {
-        stateKey: 'router',
-        routerState: RouterState.Minimal
-      }
-    ),
-    ReactiveFormsModule,
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        RoutesModule,
+        SharedModule.forRoot(),
+        LayoutModule,
+        StoreModule.forRoot(reducers,
+            {
+                metaReducers,
+                runtimeChecks: {
+                    strictActionImmutability: true,
+                    strictActionTypeUniqueness: true,
+                    strictStateImmutability: true,
+                    strictActionSerializability: true,
+                    strictStateSerializability: true,
+                    strictActionWithinNgZone: true,
+                }
+            }
+        ),
+        StoreDevtoolsModule.instrument(
+            {
+                maxAge: 25,
+                logOnly: environment.production,
+                autoPause: true
+            }
+        ),
+        EffectsModule.forRoot([
+            AuthEffects,
+            UiEffects,
+            // MenuEffects,
+            UserEffects,
+            NdermarrjeEffects
+        ]),
+        StoreRouterConnectingModule.forRoot(
+            {
+                stateKey: 'router',
+                routerState: RouterState.Minimal
+            }
+        ),
+        ReactiveFormsModule,
+        EntityDataModule.forRoot(entityConfig),
+    ],
+    providers: [
+        MenuDataService,
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(entityDataService: EntityDataService, menuDataService: MenuDataService) {
+        entityDataService.registerService('Menu', menuDataService)
+    }
+}

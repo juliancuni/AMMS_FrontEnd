@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { MenuService } from './services/menu.service';
+import { AppMenuHelper } from './services/menu.helper';
 import { SettingsService } from './services/settings.service';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -31,7 +31,7 @@ import { config, FileValueAccessor, FormlyFieldFile } from './helpers/formly.con
 
   ],
   providers: [
-    MenuService,
+    AppMenuHelper,
     SettingsService
   ],
   exports: [

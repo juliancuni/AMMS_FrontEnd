@@ -12,7 +12,7 @@ import { uiReducer, UiState } from './reducers/ui.reducer';
 import { RouterState } from '@angular/router';
 import { userReducer, UserState } from './reducers/user.reducer';
 import { authReducer, AuthState } from './reducers/auth.reducer';
-import { menuReducer, MenuState } from './reducers/menu.reducer';
+// import { menuReducer, MenuState } from './reducers/menu.reducer';
 import { ndermarrjeReducer, NdermarrjeState } from './reducers/ndermarrje.reducer';
 import { logout } from './actions/auth.actions';
 
@@ -21,7 +21,7 @@ export interface AppState {
   ui: UiState,
   users: UserState,
   auth: AuthState,
-  menus: MenuState,
+  // menus: MenuState,
   ndermarrjet: NdermarrjeState,
 
 }
@@ -31,7 +31,7 @@ export const reducers: ActionReducerMap<AppState> = {
   ui: uiReducer,
   users: userReducer,
   auth: authReducer,
-  menus: menuReducer,
+  // menus: menuReducer,
   ndermarrjet: ndermarrjeReducer,
 };
 
