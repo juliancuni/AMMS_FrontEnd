@@ -1,33 +1,24 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { NdermarrjeState } from '../reducers/ndermarrje.reducer';
 import { Observable } from 'rxjs';
-import { finalize, first, map } from 'rxjs/operators';
-import { getNdermarrjet } from '../actions/ndermarrje.actions';
+import { filter, first, tap } from 'rxjs/operators';
+import { NdermarrjeEntityService } from '../entity-services/ndermarrje-entity.service';
 
 
-@Injectable({ providedIn: 'root' })
-export class NdermarrjeResolver implements Resolve<any> {
-
-    private loading = false;
+@Injectable()
+export class NdermarrjeResolver implements Resolve<boolean> {
 
     constructor(
-        private readonly _store: Store<NdermarrjeState>,
+        private readonly _nderMarrjeStore: NdermarrjeEntityService,
     ) { }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-        return this._store.pipe(
-            map((store: any) => {
-                if (!this.loading) {
-                    if (!store.ndermarrjet || store.ndermarrjet.ids.length === 0) {
-                        this.loading = true;
-                        this._store.dispatch(getNdermarrjet());
-                    }
-                }
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+        return this._nderMarrjeStore.loaded$.pipe(
+            tap((loaded) => {
+                if (!loaded) this._nderMarrjeStore.getAll();
             }),
+            filter((loaded) => !!loaded),
             first(),
-            finalize(() => this.loading = false)
         );
     }
 }

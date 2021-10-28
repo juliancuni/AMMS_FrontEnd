@@ -1,13 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { INdermarrje } from 'src/app/shared/appwritesdk/models/ndermarrje.interface';
-import { AppState } from 'src/app/shared/store';
-import { deleteNdermarrje, zgjidhNdermarrje } from 'src/app/shared/store/actions/ndermarrje.actions';
-import { setUserPrefs } from 'src/app/shared/store/actions/user.actions';
-import { selectNdermarrjet } from 'src/app/shared/store/selectors/ndermarrje.selectors';
+import { INdermarrje } from 'src/app/shared/appwritesdk/models';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { NdermarrjeModalComponent } from '../ndermarrje-modal/ndermarrje-modal.component';
+import { NdermarrjeEntityService } from 'src/app/shared/store/entity-services/ndermarrje-entity.service';
 
 @Component({
   selector: 'app-ndermarrje-list',
@@ -21,13 +17,13 @@ export class NdermarrjeListComponent implements OnInit {
   ndermarrjet$: Observable<INdermarrje[]> | undefined;
   ndermarrje?: INdermarrje;
   constructor(
-    private readonly _store: Store<AppState>,
-    private readonly _modalService: BsModalService
+    private readonly _modalService: BsModalService,
+    private readonly _ndermarrjeStore: NdermarrjeEntityService
   ) { }
 
   regNderPrefs(ndermarrje: INdermarrje) {
-    this._store.dispatch(setUserPrefs({ userPrefs: { ndermarrje: ndermarrje.$id } }))
-    this._store.dispatch(zgjidhNdermarrje({ ndermarrje }))
+    // this._store.dispatch(setUserPrefs({ userPrefs: { ndermarrje: ndermarrje.$id } }))
+    // this._store.dispatch(zgjidhNdermarrje({ ndermarrje }))
   }
 
   newNdermarrje() {
@@ -56,7 +52,7 @@ export class NdermarrjeListComponent implements OnInit {
   }
 
   confirm(): void {
-    this._store.dispatch(deleteNdermarrje({ id: this.ndermarrje?.$id! }))
+    this._ndermarrjeStore.delete(this.ndermarrje?.$id!)
     this.bsModalRef?.hide();
   }
 
@@ -66,7 +62,7 @@ export class NdermarrjeListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.ndermarrjet$ = this._store.pipe(select(selectNdermarrjet))
+    this.ndermarrjet$ = this._ndermarrjeStore.entities$;
   }
 
 }

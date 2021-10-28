@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { INdermarrje } from 'src/app/shared/appwritesdk/models/ndermarrje.interface';
+// import { Observable } from 'rxjs';
+// import { INdermarrje } from 'src/app/shared/appwritesdk/models';
 import { AppState } from 'src/app/shared/store';
 import { setUserPrefs } from 'src/app/shared/store/actions/user.actions';
-import { selectNdermarrjet } from 'src/app/shared/store/selectors/ndermarrje.selectors';
+// import { selectNdermarrjet } from 'src/app/shared/store/selectors/ndermarrje.selectors';
 
 @Component({
     selector: 'app-dashboard',

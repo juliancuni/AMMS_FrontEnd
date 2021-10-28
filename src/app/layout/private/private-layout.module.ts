@@ -9,8 +9,25 @@ import { PrivateOffsidebarComponent } from './private-offsidebar/private-offside
 import { UserblockComponent } from './userblock/userblock.component';
 import { EmailVerificationComponent } from 'src/app/routes/public/email-verification/email-verification.component';
 import { NdermarrjeModule } from 'src/app/routes/private/ndermarrje/ndermarrje.module';
+import { MenuDataService, MenuEntityService } from '../../shared/store/entity-services/menu-entity.service';
+import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from '@ngrx/data';
+import { IMenu } from 'src/app/shared/appwritesdk/models';
+import { MenuResolver } from 'src/app/shared/store/resolvers/menu.resolver';
 
 
+const entityMetadata: EntityMetadataMap = {
+  Menu: {
+    // entityName: 'Menu',
+    selectId: (menu: IMenu) => menu.$id!,
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpdate: false,
+      optimisticUpsert: false
+    }
+  },
+}
 
 @NgModule({
   declarations: [
@@ -33,6 +50,22 @@ import { NdermarrjeModule } from 'src/app/routes/private/ndermarrje/ndermarrje.m
     PrivateFooterComponent,
     PrivateSidebarComponent,
     PrivateOffsidebarComponent
+  ],
+  providers: [
+    MenuResolver,
+    MenuDataService,
+    MenuEntityService,
   ]
 })
-export class PrivateLayoutModule { }
+export class PrivateLayoutModule {
+
+  constructor(
+    eds: EntityDefinitionService,
+    entityDataService: EntityDataService,
+    menuDataService: MenuDataService,
+
+  ) {
+    eds.registerMetadataMap(entityMetadata)
+    entityDataService.registerService('Menu', menuDataService);
+  }
+}

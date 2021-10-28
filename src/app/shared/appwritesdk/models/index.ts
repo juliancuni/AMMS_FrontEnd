@@ -1,0 +1,5 @@
+export * from './ndermarrje.interface'
+export * from './menu.interface'
+export * from './doc_list.interface'
+export * from './account.interface'
+export * from './sektor.interface'

@@ -2,20 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DefaultDataService, EntityCollectionServiceBase, EntityCollectionServiceElementsFactory, HttpUrlGenerator, Logger } from '@ngrx/data';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { MenuApi } from '../../appwritesdk/api/menu.api';
-import { IDocList } from '../../appwritesdk/models/doc_list.interface';
 import { IMenu } from '../../appwritesdk/models/menu.interface';
 
-@Injectable({ providedIn: 'root' })
+export const menuKey: string = 'Menu'; 
+
+@Injectable()
 export class MenuEntityService extends EntityCollectionServiceBase<IMenu> {
     constructor(serviceElementFactory: EntityCollectionServiceElementsFactory,) {
-        super('Menu', serviceElementFactory);
+        super(menuKey, serviceElementFactory);
     }
 }
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class MenuDataService extends DefaultDataService<IMenu> {
 
     constructor(
@@ -25,10 +25,10 @@ export class MenuDataService extends DefaultDataService<IMenu> {
         private readonly _menuApi: MenuApi,
     ) {
 
-        super('Menu', http, httpUrlGenerator)
+        super(menuKey, http, httpUrlGenerator)
     }
     getAll(): Observable<IMenu[]> {
-        this.logger.error("test")
         return this._menuApi.getMenus();
     }
+    
 }

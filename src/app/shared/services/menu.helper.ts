@@ -10,9 +10,9 @@ export class AppMenuHelper {
     menuItems$: Observable<IMenu[]>
 
     constructor(
-        private readonly _store: MenuEntityService,
+        private readonly _menuStore: MenuEntityService,
     ) {
-        this.menuItems$ = this._store.getAll()
+        this.menuItems$ = this._menuStore.entities$;
     }
 
     getMenu$(): Observable<IMenu[]> {

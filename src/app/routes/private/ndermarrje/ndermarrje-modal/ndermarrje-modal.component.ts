@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Update } from '@ngrx/entity';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { INdermarrje } from 'src/app/shared/appwritesdk/models/ndermarrje.interface';
-import { createNdermarrje, updateNdermarrje } from 'src/app/shared/store/actions/ndermarrje.actions';
-import { NdermarrjeState } from 'src/app/shared/store/reducers/ndermarrje.reducer';
+import { INdermarrje } from 'src/app/shared/appwritesdk/models';
+import { NdermarrjeEntityService } from 'src/app/shared/store/entity-services/ndermarrje-entity.service';
 
 @Component({
     selector: 'app-ndermarrje-modal',
@@ -107,7 +106,6 @@ export class NdermarrjeModalComponent implements OnInit {
             },
         ],
     }];
-    ndermarrjeModel: any = {};
     title?: string;
     closeBtnName?: string = "Mbyll";
     submitBtnName?: string = "Ruaj";
@@ -117,15 +115,15 @@ export class NdermarrjeModalComponent implements OnInit {
 
     constructor(
         public bsModalRef: BsModalRef,
-        private readonly _store: Store<NdermarrjeState>
+        private readonly _ndermarrjeStore: NdermarrjeEntityService,
     ) {
     }
 
     submitNewNdermarrje() {
         if (this.ndermarrjeForm.valid) {
             if (this.ndermarrjeForm.touched) {
-                if (this.mode === 'create') this._store.dispatch(createNdermarrje({ ndermarrje: this.ndermarrjeModel! }));
-                if (this.mode === 'update') this._store.dispatch(updateNdermarrje({ ndermarrje: this.ndermarrjeModel! }));
+                if (this.mode === 'create') this._ndermarrjeStore.add(this.ndermarrjeForm.value!);
+                if (this.mode === 'update') this._ndermarrjeStore.update(this.ndermarrje!);
             }
             this.bsModalRef.hide();
         }
@@ -137,8 +135,7 @@ export class NdermarrjeModalComponent implements OnInit {
         }
         if (this.mode === 'update') {
             this.title = this.ndermarrje?.emri;
-            this.ndermarrjeModel = { ...this.ndermarrje! }
+            this.ndermarrje = { ...this.ndermarrje! }
         }
     }
-
 }

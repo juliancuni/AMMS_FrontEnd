@@ -17,10 +17,9 @@ import { UiEffects } from './shared/store/effects/ui.effects';
 // import { MenuEffects } from './shared/store/effects/menu.effects';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserEffects } from './shared/store/effects/user.effects';
-import { NdermarrjeEffects } from './shared/store/effects/ndermarrje.effects';
-import { EntityDataModule, EntityDataService } from '@ngrx/data';
+// import { NdermarrjeEffects } from './shared/store/effects/ndermarrje.effects';
+import { EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './shared/store/entity-metadata';
-import { MenuDataService } from './shared/store/entity-services/menu-entity.service';
 
 @NgModule({
     declarations: [
@@ -58,7 +57,7 @@ import { MenuDataService } from './shared/store/entity-services/menu-entity.serv
             UiEffects,
             // MenuEffects,
             UserEffects,
-            NdermarrjeEffects
+            // NdermarrjeEffects
         ]),
         StoreRouterConnectingModule.forRoot(
             {
@@ -67,15 +66,9 @@ import { MenuDataService } from './shared/store/entity-services/menu-entity.serv
             }
         ),
         ReactiveFormsModule,
-        EntityDataModule.forRoot(entityConfig),
+        EntityDataModule.forRoot({}),
     ],
-    providers: [
-        MenuDataService,
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-    constructor(entityDataService: EntityDataService, menuDataService: MenuDataService) {
-        entityDataService.registerService('Menu', menuDataService)
-    }
-}
+export class AppModule { }

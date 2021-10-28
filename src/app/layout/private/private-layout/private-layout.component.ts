@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { INdermarrje } from 'src/app/shared/appwritesdk/models/ndermarrje.interface';
+import { INdermarrje, IAccount } from 'src/app/shared/appwritesdk/models';
 import { setUserPrefs } from 'src/app/shared/store/actions/user.actions';
 import { AuthState } from 'src/app/shared/store/reducers/auth.reducer';
 import { thisUser } from 'src/app/shared/store/selectors/auth.selectors';
-import { IAccount } from '../../../shared/appwritesdk/models/account.interface'
 
 @Component({
   selector: 'app-private-layout',

@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body">
     <form [formGroup]="ndermarrjeForm" (ngSubmit)="submitNewNdermarrje()" class="form-validate mb-3">
-        <formly-form [model]="ndermarrjeModel" [fields]="fields" [options]="options" [form]="ndermarrjeForm"></formly-form>
+        <formly-form [model]="ndermarrje" [fields]="fields" [options]="options" [form]="ndermarrjeForm"></formly-form>
         <button type="submit" class="btn btn-block btn-primary mt-3">{{submitBtnName}}</button>
     </form>
 </div>
