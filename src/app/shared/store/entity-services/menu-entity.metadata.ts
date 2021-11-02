@@ -1,7 +1,7 @@
 import { EntityMetadataMap, EntityDataModuleConfig } from '@ngrx/data';
 import { IMenu } from '../../appwritesdk/models';
 
-const entityMetadata: EntityMetadataMap = {
+export const menuEntityMetadata: EntityMetadataMap = {
     Menu: {
         // entityName: 'Menu',
         selectId: (menu: IMenu) => menu.$id!,
@@ -20,6 +20,6 @@ const pluralNames = {
 };
 
 export const menuEntityConfig: EntityDataModuleConfig = {
-    entityMetadata,
+    entityMetadata: menuEntityMetadata,
     pluralNames
 };

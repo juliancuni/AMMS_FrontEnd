@@ -8,24 +8,11 @@ import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from '@
 import { NdermarrjeDataService, NdermarrjeEntityService } from 'src/app/shared/store/entity-services/ndermarrje-entity.service';
 import { INdermarrje } from 'src/app/shared/appwritesdk/models';
 import { NdermarrjeResolver } from 'src/app/shared/store/resolvers/ndermarrje.resolver';
+import { ndermarrjeEntityMetadata } from 'src/app/shared/store/entity-services/ndermarrje-entity.metadata';
 
 const routes: Routes = [
   { path: '', component: NdermarrjeListComponent }
 ]
-
-const entityMetadata: EntityMetadataMap = {
-  Ndermarrje: {
-    // entityName: 'Ndermarrje',
-    selectId: (ndermarrje: INdermarrje) => ndermarrje.$id!,
-    entityDispatcherOptions: {
-      optimisticAdd: false,
-      optimisticSaveEntities: false,
-      optimisticDelete: false,
-      optimisticUpdate: false,
-      optimisticUpsert: false
-    }
-  },
-}
 
 @NgModule({
   declarations: [
@@ -53,7 +40,7 @@ export class NdermarrjeModule {
     ndermarrjeDataService: NdermarrjeDataService,
 
   ) {
-    eds.registerMetadataMap(entityMetadata)
+    eds.registerMetadataMap(ndermarrjeEntityMetadata)
     entityDataService.registerService('Ndermarrje', ndermarrjeDataService);
   }
 }

@@ -13,21 +13,7 @@ import { MenuDataService, MenuEntityService } from '../../shared/store/entity-se
 import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from '@ngrx/data';
 import { IMenu } from 'src/app/shared/appwritesdk/models';
 import { MenuResolver } from 'src/app/shared/store/resolvers/menu.resolver';
-
-
-const entityMetadata: EntityMetadataMap = {
-  Menu: {
-    // entityName: 'Menu',
-    selectId: (menu: IMenu) => menu.$id!,
-    entityDispatcherOptions: {
-      optimisticAdd: false,
-      optimisticSaveEntities: false,
-      optimisticDelete: false,
-      optimisticUpdate: false,
-      optimisticUpsert: false
-    }
-  },
-}
+import { menuEntityMetadata } from 'src/app/shared/store/entity-services/menu-entity.metadata';
 
 @NgModule({
   declarations: [
@@ -65,7 +51,7 @@ export class PrivateLayoutModule {
     menuDataService: MenuDataService,
 
   ) {
-    eds.registerMetadataMap(entityMetadata)
+    eds.registerMetadataMap(menuEntityMetadata)
     entityDataService.registerService('Menu', menuDataService);
   }
 }

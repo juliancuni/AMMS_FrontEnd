@@ -1,7 +1,7 @@
 import { EntityMetadataMap, EntityDataModuleConfig } from '@ngrx/data';
 import { INdermarrje } from '../../appwritesdk/models';
 
-const entityMetadata: EntityMetadataMap = {
+export const ndermarrjeEntityMetadata: EntityMetadataMap = {
     Ndermarrje: {
         // entityName: 'Ndermarrje',
         selectId: (ndermarrje: INdermarrje) => ndermarrje.$id!,
@@ -19,7 +19,7 @@ const pluralNames = {
     // Ndermarrje: 'Ndermarrjet'
 };
 
-export const entityConfig: EntityDataModuleConfig = {
-    entityMetadata,
+export const ndermarrjeEntityConfig: EntityDataModuleConfig = {
+    entityMetadata: ndermarrjeEntityMetadata,
     pluralNames
 };
